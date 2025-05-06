@@ -193,7 +193,7 @@ def plot_dbscan_silhouette_plotly(proj_2d, df_transpuesto, eps_values, min_sampl
                 fig.update_yaxes(title_text="Second dimension", row=1, col=2)
 
                 current_dir = os.getcwd()
-                fig.write_image(os.path.join(current_dir, f"{output_dir}/Figures", f"dbscan_{image_name}_method.png"))
+                fig.write_image(os.path.join(current_dir, f"{output_dir}/Figures", f"dbscan_{image_name}.png"))
                 # fig.write_html(os.path.join(current_dir, "Results/Figures", f"dbscan_{image_name}_method.html"))
 
         # After the loop, df_augmented now contains cluster labels corresponding to the best average silhouette score
