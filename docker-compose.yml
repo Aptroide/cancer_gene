@@ -1,0 +1,9 @@
+services:
+  main:
+    build: .
+    image: aptroide/genes_protocol-main:V2.1
+    ports:
+      - 8000:8000
+    volumes:
+      - ./Results:/usr/src/app/Results
+      - ./Data:/usr/src/app/Data
