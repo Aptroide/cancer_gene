@@ -323,7 +323,9 @@ def main():
         print_fancy_title("Machine Learning Models Tuning")
         results = run_pipeline(best_file, cluster_num=int(best_file['Cluster'].iloc[-1]))
     else:
-        print("No files found containing 'best_cluster'.")
+        best_file_path = os.path.join(cluster_csv_path, best_cluster_files[0])
+        best_file = pd.read_csv(best_file_path)
+        print(f"Best cluster file: {best_file_path}")
 
     # Save times
     with open('times.json', 'w') as json_file:
