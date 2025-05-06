@@ -17,7 +17,8 @@ def process_single_file(args):
     # Select and rename frequency column
     return df[['Frecuencia (%)']].rename(columns={'Frecuencia (%)': study_id})
 
-def load_and_combine_csv_files(folder_path, depre_file, study_name):
+
+def load_and_combine_csv_files(folder_path, condition_file, study_name):
     """Load and combine CSV files in parallel"""
     # Get list of CSV files
     csv_files = [f for f in os.listdir(folder_path) if f.endswith('_freqAltas.csv')]
@@ -35,14 +36,15 @@ def load_and_combine_csv_files(folder_path, depre_file, study_name):
         master_df = master_df.join(df, how='outer')
     
     # Process depression file
-    frecuencia_df = pd.read_csv(depre_file)
+    frecuencia_df = pd.read_csv(condition_file)
     original_df = master_df.copy()
     original_df[study_name] = np.nan
     
     # Add depression data
     for index, row in frecuencia_df.iterrows():
-        gene = row['Gene']
-        frecuencia = row['Frecuencia (%)']
+        gene = row.iloc[0]         # Primera columna
+        frecuencia = row.iloc[1]   # Segunda columna
+
         
         if gene in original_df.index:
             original_df.at[gene, study_name] = frecuencia
