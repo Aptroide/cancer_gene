@@ -6,7 +6,7 @@ This project analyzes genetic associations between cancer and other health condi
 
 ## Prerequisites
 
-- Python 3.11 or higher
+- Python 3.11.X
 - Docker and Docker Compose (optional, for containerized execution)
 - Internet connection (for cBioPortal API access)
 
@@ -50,7 +50,37 @@ This project analyzes genetic associations between cancer and other health condi
    pip install -r requirements.txt
    ```
 
-5. Run the application (suppressing GPU warnings):
+5. Create required directories and configuration files:
+   ```bash
+   mkdir -p Data Results 
+   ```
+
+6. Edit a configuration file (inside `/Data` directory):
+   ```bash
+   echo '{
+       "file_path": "Data/your_condition_file.csv",
+       "studies_path": null,
+       "output_path": "Results",
+       "num_cancer_studies": 10,
+       "num_genes_per_study": null,
+       "your_study_name": "Your_Condition",
+       "classification": false
+   }' > Data/config.json
+   ```
+
+7. Prepare your input data file:
+   - Create a CSV file with gene frequencies in `Data/your_condition_file.csv`:
+
+      ```bash
+      Gene,Frequency
+      APP,0.45
+      PSEN1,0.32
+      PSEN2,0.28
+      ```
+
+   - Format should be: Gene name in first column, frequency in second column
+
+8. Run the application (suppressing GPU warnings):
    - Linux and macOS:
    ```bash
    python3 main.py 2>/dev/null
@@ -76,13 +106,37 @@ Ensure Docker and Docker Compose are installed on your system. For installation 
    curl -O https://raw.githubusercontent.com/Aptroide/cancer_gene/main/docker-compose.yml
    ```
 
-2. Create the required directories:
-   - Create a `./Data` directory to store configuration files and input data
-   - Create a `./Results` directory where output files will be saved
-   
-   Both directories should be at the same level as the downloaded docker-compose.yml file.
+2. Create the required directories and files:
+   ```bash
+   mkdir -p ./Data ./Results/Figures ./Results/ClustersCSV
+   ```
 
-3. Build and start the container:
+3. Create a basic configuration file:
+   ```bash
+   echo '{
+       "file_path": "Data/your_condition_file.csv",
+       "studies_path": null,
+       "output_path": "Results",
+       "num_cancer_studies": 10,
+       "num_genes_per_study": null,
+       "your_study_name": "Your_Condition",
+       "classification": false
+   }' > ./Data/config.json
+   ```
+
+4. Prepare your input data file:
+   - Create a CSV file with gene frequencies in `Data/your_condition_file.csv`:
+
+      ```bash
+      Gene,Frequency
+      APP,0.45
+      PSEN1,0.32
+      PSEN2,0.28
+      ```
+
+   - Format should be: Gene name in first column, frequency in second column
+
+5. Build and start the container:
    ```bash
    docker-compose up
    ```
