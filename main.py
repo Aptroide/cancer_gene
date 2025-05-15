@@ -1,16 +1,6 @@
 import os
 import sys
 
-# Redirige stderr antes de importar módulos ruidosos
-# Variables de entorno
-# os.environ['CUDA_VISIBLE_DEVICES'] = '-1'
-# os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
-# os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
-# os.environ['XLA_FLAGS'] = '--xla_cpu_multi_thread_eigen=false'
-# sys.stderr = open(os.devnull, 'w')
-
-import absl.logging
-absl.logging.set_verbosity(absl.logging.ERROR)
 from modules import data_extration, val_csv, dim_red, k_means, dbscan
 from modules import proc_data
 from modules.classification import run_pipeline
