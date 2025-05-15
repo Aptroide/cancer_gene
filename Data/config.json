@@ -1,0 +1,9 @@
+{
+    "file_path": "Data/diabetes.csv",
+    "studies_path": "Data/study_ids.txt",
+    "output_path": "Results",
+    "num_cancer_studies": 500,
+    "num_genes_per_study": null,
+    "your_study_name": "diabetes",
+    "classification": false
+}
